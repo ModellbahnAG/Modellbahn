@@ -1,3 +1,4 @@
+#include <Arduino.h>
 #include <Servo.h>
 #include <Adafruit_NeoPixel.h>
 
@@ -18,35 +19,6 @@ int alarmLED = 10;
 
 
 Servo myServo;
-
-void setup() {
-  Serial.begin(9600);
-  pinMode(taster, INPUT);
-  pinMode(rauchgenerator, OUTPUT);
-
-  // attachInterrupt(0, explosion, RISING);
-
-  myServo.attach(servoPin);
-  myServo.write(0);
-
-  flashLED.begin();
-
-  digitalWrite(rauchgenerator, HIGH);
-  delay(20000);
-  digitalWrite(rauchgenerator, LOW);
-}
-
-
-void loop() {
-  if (digitalRead(taster) == HIGH){
-    explosion();
-  } /*else if (millis()%60000 == 0) {
-    digitalWrite(rauchgenerator, HIGH);
-  } else if (millis()%20000 == 0 && millis()%60000 != 0) {
-    digitalWrite(rauchgenerator, LOW);
-  }*/
-}
-
 
 void flash() {
     unsigned long startTime = millis();
@@ -74,6 +46,7 @@ void flash() {
     }
 }
 
+
 void explosion() {
   digitalWrite(rauchgenerator, HIGH);
   unsigned long startTime = millis();
@@ -95,4 +68,33 @@ void explosion() {
   myServo.write(0);
   digitalWrite(rauchgenerator, LOW);
   digitalWrite(13, LOW);
+}
+
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(taster, INPUT);
+  pinMode(rauchgenerator, OUTPUT);
+
+  // attachInterrupt(0, explosion, RISING);
+
+  myServo.attach(servoPin);
+  myServo.write(0);
+
+  flashLED.begin();
+
+  digitalWrite(rauchgenerator, HIGH);
+  delay(20000);
+  digitalWrite(rauchgenerator, LOW);
+}
+
+
+void loop() {
+  if (digitalRead(taster) == HIGH){
+    explosion();
+  } /*else if (millis()%60000 == 0) {
+    digitalWrite(rauchgenerator, HIGH);
+  } else if (millis()%20000 == 0 && millis()%60000 != 0) {
+    digitalWrite(rauchgenerator, LOW);
+  }*/
 }
