@@ -30,7 +30,7 @@ void Button::init() {
 
 void Button::buttonPressed() {
   if (this->activated) {
-    this->firsPress = millis();
+    this->lastPress = millis();
 
     Wire.beginTransmission(address);
     Wire.write(1);
@@ -42,7 +42,7 @@ void Button::buttonPressed() {
 }
 
 void Button::checkForTime() {
-  if (millis() >= this->firstPress + delayTime * 1000) {
+  if (millis() >= this->lastPress + delayTime * 1000) {
     this->activated = true;
     digitalWrite(lightPin, HIGH);
   }

@@ -12,11 +12,13 @@ class Button {
     byte lightPin;    // Pin des Lichts
     int delayTime;    // Zeit, die der Taster deaktiviert ist (in Sekunden)
 
-    unsigned long firsPress = 0;
+    unsigned long lastPress = 0;   // Zeit, zu der der Taster zum letzten Mal gedrückt wurde
     bool activated = true;
 
   public:
     Button(byte address, byte inputPin, byte lightPin, int delayTime = 60);
+
+    void init();
 
     void buttonPressed();
 
