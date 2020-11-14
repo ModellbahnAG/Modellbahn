@@ -1,25 +1,24 @@
 #include <Arduino.h>
 #include <Servo.h>
-#include <Adafruit_NeoPixel.h>
+#include "Wire.h"
+
 #include "NeoPixel.h"
+
 
 #define LED_PIN         9
 #define NUMPIXELS       2
 
-// Adafruit_NeoPixel flashLED = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
 NeoPixel flashLED = NeoPixel(NUMPIXELS, 9);
 
+byte address = 0;
 
-int taster = 2;
-
-int servoPin = 8;
-
-int rauchgenerator = 13;
-
-int alarmLED = 10;
-
+byte servoPin = 8;
+byte smoker = 13;
+byte alarmLED = 10;
 
 Servo myServo;
+
+
 
 void flash() {
     unsigned long startTime = millis();
@@ -30,26 +29,24 @@ void flash() {
       Serial.print("LED ");
       Serial.println(led);
 
-      flashLED.setColor(led, flashLED.Color(255,200,255));
-      flashLED.show();
+      flashLED.setColor(led, 255,200,255);
 
       int delayTime = random(10, 100);
       Serial.println(delayTime);
       delay(delayTime);
 
-      flashLED.setPixelColor(led, flashLED.Color(0,0,0));
+      flashLED.off();
     }
 
     for (int led = 0; led < NUMPIXELS; led++) {
-      flashLED.setPixelColor(led, flashLED.Color(0,0,0));
+      flashLED.off();
     }
 }
 
 
 void explosion() {
-  digitalWrite(rauchgenerator, HIGH);
+  digitalWrite(smoker, HIGH);
   unsigned long startTime = millis();
-  // delayMicroseconds(100000);
 
   while (millis() < startTime + 5000) {
     digitalWrite(alarmLED, HIGH);
@@ -65,35 +62,31 @@ void explosion() {
 
   delay(5000);
   myServo.write(0);
-  digitalWrite(rauchgenerator, LOW);
+  digitalWrite(smoker, LOW);
   digitalWrite(13, LOW);
+}
+
+
+void receiveEvent(int howMany) {
+  explosion();
 }
 
 
 void setup() {
   Serial.begin(9600);
-  pinMode(taster, INPUT);
-  pinMode(rauchgenerator, OUTPUT);
-
-  // attachInterrupt(0, explosion, RISING);
+  pinMode(smoker, OUTPUT);
 
   myServo.attach(servoPin);
   myServo.write(0);
 
-  flashLED.begin();
+  Wire.begin(address);
+  Wire.onReceive(receiveEvent);
 
-  digitalWrite(rauchgenerator, HIGH);
+
+  digitalWrite(smoker, HIGH);
   delay(20000);
-  digitalWrite(rauchgenerator, LOW);
+  digitalWrite(smoker, LOW);
 }
 
 
-void loop() {
-  if (digitalRead(taster) == HIGH){
-    explosion();
-  } /*else if (millis()%60000 == 0) {
-    digitalWrite(rauchgenerator, HIGH);
-  } else if (millis()%20000 == 0 && millis()%60000 != 0) {
-    digitalWrite(rauchgenerator, LOW);
-  }*/
-}
+void loop() {}
