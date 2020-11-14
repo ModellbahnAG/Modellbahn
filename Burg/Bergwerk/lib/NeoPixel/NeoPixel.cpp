@@ -13,10 +13,42 @@ void NeoPixel::init() {
   pixels.begin();
 }
 
-void NeoPixel::setColor(int r, int g, int b) {
-  pixels.setPixelColor(0, r, g, b);
+
+void NeoPixel::setColor(byte pixel, int r, int g, int b) {
+  pixels.setPixelColor(pixel, r, g, b);
   pixels.show();
 }
+
+
+void NeoPixel::setColor(byte pixel, color color) {
+  uint32_t colorValue;
+  switch (color) {
+    case RED:
+      colorValue = pixels.Color(255, 0, 0);
+    case GREEN:
+      colorValue = pixels.Color(0, 255, 0);
+    case YELLOW:
+      colorValue = pixels.Color(255, 255, 0);
+    case BLUE:
+      colorValue = pixels.Color(0, 0, 255);
+  }
+
+  pixels.setPixelColor(pixel, colorValue);
+  pixels.show();
+}
+
+
+void NeoPixel::setColor(pixels.Color color) {
+  pixels.setPixelColor(pixel, color);
+  pixels.show();
+}
+
+
+void NeoPixel::setColor(int r, int g, int b) {
+  pixels.fill(r, g, b);
+  pixels.show();
+}
+
 
 void NeoPixel::setColor(color color) {
   uint32_t colorValue;
@@ -35,27 +67,12 @@ void NeoPixel::setColor(color color) {
   pixels.show();
 }
 
-void NeoPixel::setColor(byte pixel, int r, int g, int b) {
-  pixels.fill(pixel, r, g, b);
+void NeoPixel::setColor(pixels.Color color) {
+  pixels.fill(color);
   pixels.show();
 }
 
-void NeoPixel::setColor(byte pixel, color color) {
-  uint32_t colorValue;
-  switch (color) {
-    case RED:
-      colorValue = pixels.Color(255, 0, 0);
-    case GREEN:
-      colorValue = pixels.Color(0, 255, 0);
-    case YELLOW:
-      colorValue = pixels.Color(255, 255, 0);
-    case BLUE:
-      colorValue = pixels.Color(0, 0, 255);
-  }
 
-  pixels.setPixelColor(pixel, colorValue);
-  pixels.show();
-}
 
 void NeoPixel::off() {
   pixels.clear();

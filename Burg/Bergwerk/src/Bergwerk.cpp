@@ -1,12 +1,13 @@
 #include <Arduino.h>
 #include <Servo.h>
 #include <Adafruit_NeoPixel.h>
+#include "NeoPixel.h"
 
 #define LED_PIN         9
 #define NUMPIXELS       2
 
-Adafruit_NeoPixel flashLED = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
-
+// Adafruit_NeoPixel flashLED = Adafruit_NeoPixel(NUMPIXELS, LED_PIN, NEO_GRB + NEO_KHZ800);
+NeoPixel flashLED = NeoPixel(NUMPIXELS, 9);
 
 
 int taster = 2;
@@ -29,7 +30,7 @@ void flash() {
       Serial.print("LED ");
       Serial.println(led);
 
-      flashLED.setPixelColor(led, flashLED.Color(255,200,255));
+      flashLED.setColor(led, flashLED.Color(255,200,255));
       flashLED.show();
 
       int delayTime = random(10, 100);
@@ -37,12 +38,10 @@ void flash() {
       delay(delayTime);
 
       flashLED.setPixelColor(led, flashLED.Color(0,0,0));
-      flashLED.show();
     }
 
     for (int led = 0; led < NUMPIXELS; led++) {
       flashLED.setPixelColor(led, flashLED.Color(0,0,0));
-      flashLED.show();
     }
 }
 
