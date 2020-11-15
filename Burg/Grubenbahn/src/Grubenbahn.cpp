@@ -1,20 +1,27 @@
-int taster = 12;
+#include <Arduino.h>
+#include <Wire.h>
+
+byte address = 3;
+
 int bahn = 13;
-int bahn1 = 10;
-int bahn2 = 9;
 int led = 11;
 
 int helligkeitLed = 50;
 
+void receiveEvent(int howMany) {
+  digitalWrite(bahn, HIGH);
+  delay(5000);
+  digitalWrite(bahn, LOW);
+}
+
 void setup() {
-  pinMode(taster, INPUT);
   pinMode(bahn, OUTPUT);
-  pinMode(bahn1, OUTPUT);
-  pinMode(bahn2, OUTPUT);
   pinMode(led, OUTPUT);
 
+  Wire.begin(address);
+  Wire.onReceive(receiveEvent);
+
   randomSeed(analogRead(A0));
-  Serial.begin(9600);
 
   analogWrite(led, helligkeitLed);
 }
@@ -26,15 +33,5 @@ void loop() {
     analogWrite(led, 0);
     delay(5);
     analogWrite(led, helligkeitLed);
-  }
-
-  if (digitalRead(taster)) {
-    digitalWrite(bahn, HIGH);
-    digitalWrite(bahn1, HIGH);
-    digitalWrite(bahn2, HIGH);
-    delay(5000);
-    digitalWrite(bahn, LOW);
-    digitalWrite(bahn1, LOW);
-    digitalWrite(bahn2, LOW);
   }
 }
