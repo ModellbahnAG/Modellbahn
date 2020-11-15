@@ -15,10 +15,13 @@ class Button {
     unsigned long lastPress = 0;   // Zeit, zu der der Taster zum letzten Mal gedrückt wurde
     bool activated = true;
 
-  public:
-    Button(byte address, byte inputPin, byte lightPin, int delayTime = 60);
 
+  public:
+
+    Button(byte address, byte inputPin, byte lightPin, int delayTime = 60);
     void init();
+
+    void handleButton();
 
     void buttonPressed();
 
