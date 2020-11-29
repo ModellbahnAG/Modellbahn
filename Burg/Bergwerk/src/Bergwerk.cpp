@@ -18,6 +18,7 @@ byte alarmLED = 10;
 
 Servo myServo;
 
+bool shouldExplode = false;
 
 
 void flash() {
@@ -48,45 +49,45 @@ void explosion() {
   digitalWrite(smoker, HIGH);
   unsigned long startTime = millis();
 
-  while (millis() < startTime + 5000) {
-    digitalWrite(alarmLED, HIGH);
-    delay(500);
-    digitalWrite(alarmLED, LOW);
+  while (millis() < startTime + 10000) {
+    digitalWrite(alarmLED, !digitalRead(alarmLED));   //alle 0.5 Sekunden den Wert der LED wechseln
     delay(500);
   }
+
   digitalWrite(alarmLED, LOW);
+  digitalWrite(smoker, LOW);
 
   myServo.write(90);
 
   flash();
 
-  delay(5000);
+  delay(2000);
   myServo.write(0);
-  digitalWrite(smoker, LOW);
-  digitalWrite(13, LOW);
 }
 
 
 void receiveEvent(int howMany) {
-  explosion();
+  shouldExplode = Wire.read();
 }
 
 
 void setup() {
   Serial.begin(9600);
+
   pinMode(smoker, OUTPUT);
+  pinMode(alarmLED, OUTPUT);
 
   myServo.attach(servoPin);
   myServo.write(0);
 
   Wire.begin(address);
   Wire.onReceive(receiveEvent);
-
-
-  digitalWrite(smoker, HIGH);
-  delay(20000);
-  digitalWrite(smoker, LOW);
 }
 
 
-void loop() {}
+void loop() {
+  if (shouldExplode) {
+    explosion();
+    shouldExplode = false;
+  }
+}

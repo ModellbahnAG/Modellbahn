@@ -10,7 +10,7 @@ NeoPixel::NeoPixel(byte pin, int number) {
 void NeoPixel::init() {
   Adafruit_NeoPixel pixels = Adafruit_NeoPixel(number, pin, NEO_GRB + NEO_KHZ800);
   this -> pixels = pixels;
-  pixels.begin();
+  this -> pixels.begin();
 }
 
 
