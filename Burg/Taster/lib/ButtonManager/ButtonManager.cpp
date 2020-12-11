@@ -3,7 +3,7 @@
 ButtonListItem* ButtonManager::head = NULL;
 
 void ButtonManager::begin() {
-  Timer1.initialize(500000);
+  Timer1.initialize(100000);
   Timer1.attachInterrupt(ButtonManager::handleButtons); // handleButtons every 0.1 seconds
 }
 
@@ -17,6 +17,7 @@ void ButtonManager::addButton(Button *newButton) {
 }
 
 void ButtonManager::handleButtons() {
+  noInterrupts();
   Serial.println(millis());
   ButtonListItem* buttonPtr = ButtonManager::head;
 
@@ -24,4 +25,5 @@ void ButtonManager::handleButtons() {
     buttonPtr->button->handleButton();
     buttonPtr = buttonPtr->next;
   }
+  interrupts();
 }

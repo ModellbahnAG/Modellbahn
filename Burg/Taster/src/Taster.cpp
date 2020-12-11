@@ -5,7 +5,8 @@
 
 
 const int numberOfButtons = 1;
-// (Pin des Tasters (2, 3, 18, 19, 20, 21), Pin des Lichts, (optional: Zeit, die der Taster deaktiviert ist in Sekunden))
+
+// (Pin des Tasters (0-7), Pin des Lichts (34-48), (optional: Zeit, die der Taster deaktiviert ist in Sekunden))
 Button buttonArr[numberOfButtons] = {Button(7, 34, 10)};   // Addressen müssen bei Master und Slave manuell eingestellt werden!!!
 byte slaveAddr[numberOfButtons] = {0};
 
@@ -30,4 +31,6 @@ void setup() {
   ButtonManager::begin();
 }
 
-void loop() {}
+void loop() {
+  Serial.println("l");
+}
