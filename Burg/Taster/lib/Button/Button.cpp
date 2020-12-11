@@ -2,7 +2,7 @@
 
 
 
-Button::Button(byte inputPin, byte lightPin, int delayTime = 60) {
+Button::Button(byte inputPin, byte lightPin, int delayTime) {
   this->inputPin = inputPin;
   this->lightPin = lightPin;
   this->delayTime = delayTime;
