@@ -1,8 +1,11 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "ButtonManager.h"
+#include "Button.h"
 
+/*
+ * Taster können nur an folgende Pins angeschlossen werden: 2, 3, 18, 19, 20, 21
+*/
 
 const int numberOfButtons = 1;
 // (Pin des Tasters (2, 3, 18, 19, 20, 21), Pin des Lichts, (optional: Zeit, die der Taster deaktiviert ist in Sekunden))
@@ -16,7 +19,6 @@ void sendStart(byte address) {
   Wire.endTransmission();
 }
 
-
 void setup() {
   Wire.begin();
 
@@ -24,10 +26,11 @@ void setup() {
 
   for(int i = 0; i < numberOfButtons; i++) {
     buttonArr[i].setCallback(&sendStart, slaveAddr[i]);
-    ButtonManager::addButton(&buttonArr[i]);
   }
-
-  ButtonManager::begin();
 }
 
-void loop() {}
+void loop() {
+  for (int i = 0; i < numberOfButtons; i++) {     // durchläuft alle Taster, Anzahl der Taster muss oben angepasst werden!!!
+    buttonArr[i].handleButton();       // Überprüft jeden Taster, ob er wieder aktiviert werden kann und ob er gedrückt wurde
+  }
+}
