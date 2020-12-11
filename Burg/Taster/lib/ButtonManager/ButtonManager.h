@@ -1,17 +1,23 @@
 #ifndef BUTTON_MANAGER_H
 #define BUTTON_MANAGER_H
+
 #include <Arduino.h>
 #include "Button.h"
 
-struct ButtonListItem {
+struct ButtonList {
   Button* button;
-  ButtonListItem* next;
+  ButtonList* next;
 };
 
 class ButtonManager {
   public:
-    static ButtonListItem* listHead;
-    static void addButton(Button* newButton);
-    static void handleButtons();
+    static ButtonList* listHead;            // Liste aller Buttons
+
+    static void addButton(Button* newButton);   // fügt neuen Button zur Liste hinzu
+    static void handleButtons();                // überprüft, welcher Taster gedrückt wurde oder ob einer wieder aktiviert werden kann
+
+    static void removeButton(Button* toDelete);
+    static void removeList();
 };
+
 #endif
