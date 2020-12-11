@@ -24,15 +24,16 @@ void setup() {
   Serial.begin(9600);
 
   for(int i = 0; i < numberOfButtons; i++) {
-    buttonArr[i].setCallback(CallLambda([slaveAddr, i] () {
+    buttonArr[i].setCallback(CallLambda([i] () {
       sendStart(slaveAddr[i]);
       return 1;
     }));
     ButtonManager::addButton(&buttonArr[i]);
   }
-
-  ButtonManager::begin();
 }
 
 
-void loop() {}
+void loop() {
+  ButtonManager::handleButtons();
+  delay(10);
+}

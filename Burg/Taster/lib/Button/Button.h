@@ -70,8 +70,7 @@ struct lambda_callback_t {
 		lambda = copy.lambda;
 		remove = copy.remove;
 	}
-	void replace(const lambda_callback_t& with)
-	{
+	void replace(const lambda_callback_t& with)	{
 		if (lambda)
 			remove(lambda);
 		invoke.interface = with.invoke.interface;
@@ -122,6 +121,9 @@ class Button {
 
     lambda_callback_t callback;
 
+		int buttonPressed();
+    void checkForTime();
+
   public:
     Button(byte inputPin, byte lightPin, int delayTime = 60);
     ~Button() {
@@ -134,8 +136,6 @@ class Button {
       this->callback.replace(to);
     }
 
-    int buttonPressed();
-    void checkForTime();
     void handleButton();
 
 };

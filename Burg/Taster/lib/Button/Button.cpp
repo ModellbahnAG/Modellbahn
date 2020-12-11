@@ -18,7 +18,9 @@ void Button::init() {
 }
 
 int Button::buttonPressed() {
+  Serial.print("b");
   if (this->activated) {
+    Serial.println("is activated");
     this->lastPress = millis();
 
     this->activated = false;

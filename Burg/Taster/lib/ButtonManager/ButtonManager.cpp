@@ -1,29 +1,23 @@
 #include "ButtonManager.h"
 
-ButtonListItem* ButtonManager::head = NULL;
+ButtonListItem* ButtonManager::listHead = NULL;
 
-void ButtonManager::begin() {
-  Timer1.initialize(100000);
-  Timer1.attachInterrupt(ButtonManager::handleButtons); // handleButtons every 0.1 seconds
-}
+
 
 void ButtonManager::addButton(Button *newButton) {
   ButtonListItem* link = new ButtonListItem;
 
   link->button = newButton;
-  link->next = ButtonManager::head;
+  link->next = ButtonManager::listHead;
 
-  ButtonManager::head = link;
+  ButtonManager::listHead = link;
 }
 
 void ButtonManager::handleButtons() {
-  noInterrupts();
-  Serial.println(millis());
-  ButtonListItem* buttonPtr = ButtonManager::head;
+  ButtonListItem* buttonPtr = ButtonManager::listHead;
 
   while (buttonPtr != NULL) {
     buttonPtr->button->handleButton();
     buttonPtr = buttonPtr->next;
   }
-  interrupts();
 }
