@@ -1,11 +1,10 @@
 #include <Arduino.h>
 #include <Wire.h>
 
-#include "ButtonManager.h"
+#include "Button.h"
 
 
 const int numberOfButtons = 1;
-
 // (Pin des Tasters (0-7), Pin des Lichts (34-48), (optional: Zeit, die der Taster deaktiviert ist in Sekunden))
 Button buttonArr[numberOfButtons] = {Button(7, 34, 10)};   // Addressen müssen bei Master und Slave manuell eingestellt werden!!!
 byte slaveAddr[numberOfButtons] = {0};
@@ -17,20 +16,21 @@ void sendStart(byte address) {
   Wire.endTransmission();
 }
 
-
 void setup() {
   Wire.begin();
 
   Serial.begin(9600);
 
   for(int i = 0; i < numberOfButtons; i++) {
-    buttonArr[i].setCallback(&sendStart, slaveAddr[i]);
-    ButtonManager::addButton(&buttonArr[i]);
+    buttonArr[i].setCallback(CallLambda([slaveAddr, i] () {
+      sendStart(slaveAddr[i]);
+      return 1;
+    }));
   }
-
-  ButtonManager::begin();
 }
 
 void loop() {
-  Serial.println("l");
+  for (int i = 0; i < numberOfButtons; i++) {     // durchläuft alle Taster, Anzahl der Taster muss oben angepasst werden!!!
+    buttonArr[i].handleButton();       // Überprüft jeden Taster, ob er wieder aktiviert werden kann und ob er gedrückt wurde
+  }
 }
