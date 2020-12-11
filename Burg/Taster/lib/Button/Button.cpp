@@ -1,12 +1,6 @@
 #include <Button.h>
 
 
-Button *pointerToClass;
-
-static void outsideInterruptHandler() {
-  pointerToClass->buttonPressed();
-}
-
 
 Button::Button(byte inputPin, byte lightPin, int delayTime = 60) {
   this->inputPin = inputPin;
@@ -17,22 +11,20 @@ Button::Button(byte inputPin, byte lightPin, int delayTime = 60) {
 }
 
 void Button::init() {
-  pointerToClass = this;
-
   pinMode(inputPin, INPUT_PULLUP);
   pinMode(lightPin, OUTPUT);
 
   digitalWrite(lightPin, LOW);
 }
 
-void Button::buttonPressed() {
+int Button::buttonPressed() {
   if (this->activated) {
     this->lastPress = millis();
 
-    buttonPressCallback(this->variable);
-
     this->activated = false;
     digitalWrite(lightPin, LOW);
+
+    return callback.invoke();
   }
 }
 
@@ -46,6 +38,6 @@ void Button::checkForTime() {
 void Button::handleButton() {
   checkForTime();
   if (!digitalRead(this->inputPin)) {
-    buttonPressed();
+    Serial.println(buttonPressed());
   }
 }
