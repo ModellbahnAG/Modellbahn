@@ -38,12 +38,6 @@ void NeoPixel::setColor(byte pixel, color color) {
 }
 
 
-// void NeoPixel::setColor(Adafruit_NeoPixel.Color color) {
-//   pixels.setPixelColor(pixel, color);
-//   pixels.show();
-// }
-
-
 void NeoPixel::setColor(int r, int g, int b) {
   pixels.fill(r, g, b);
   pixels.show();
@@ -66,12 +60,6 @@ void NeoPixel::setColor(color color) {
   pixels.fill(colorValue);
   pixels.show();
 }
-
-// void NeoPixel::setColor(Adafruit_NeoPixel.Color color) {
-//   pixels.fill(color);
-//   pixels.show();
-// }
-
 
 
 void NeoPixel::off() {

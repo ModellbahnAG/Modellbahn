@@ -62,6 +62,7 @@ void setup() {
   pinMode(fire, OUTPUT);
 
   pixels.off();
+  receiveEvent(0);
 }
 
 void loop() {}
