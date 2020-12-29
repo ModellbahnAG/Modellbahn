@@ -1,16 +1,16 @@
 #include <Arduino.h>
 #include <Servo.h>
-#include "Wire.h"
+#include <Wire.h>
 
-#include "NeoPixel.h"
+#include "Modellbahn.h"
 
 
-#define LED_PIN         9
-#define NUMPIXELS       2
+#define PIN         9
+#define NUMPIXELS   2
+#define ADDRESS 0
 
-NeoPixel flashLED = NeoPixel(NUMPIXELS, 9);
+NeoPixel flashLED = NeoPixel(NUMPIXELS, PIN);
 
-byte address = 0;
 
 byte servoPin = 8;
 byte smoker = 13;
@@ -19,30 +19,6 @@ byte alarmLED = 10;
 Servo myServo;
 
 bool shouldExplode = false;
-
-
-void flash() {
-    unsigned long startTime = millis();
-
-    while(millis() < startTime + 1000) {
-      int led = random(0, 2);
-
-      Serial.print("LED ");
-      Serial.println(led);
-
-      flashLED.setColor(led, 255,200,255);
-
-      int delayTime = random(10, 100);
-      Serial.println(delayTime);
-      delay(delayTime);
-
-      flashLED.off();
-    }
-
-    for (int led = 0; led < NUMPIXELS; led++) {
-      flashLED.off();
-    }
-}
 
 
 void explosion() {
@@ -59,7 +35,7 @@ void explosion() {
 
   myServo.write(90);
 
-  flash();
+  LightEffects::flash(&flashLED);
 
   delay(2000);
   myServo.write(0);
@@ -80,7 +56,7 @@ void setup() {
   myServo.attach(servoPin);
   myServo.write(0);
 
-  Wire.begin(address);
+  Wire.begin(ADDRESS);
   Wire.onReceive(receiveEvent);
 }
 
