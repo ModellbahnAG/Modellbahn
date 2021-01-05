@@ -2,18 +2,17 @@
 #include <Wire.h>
 
 #define ADDRESS 2
-
-int bahn = 13;
-int led = 11;
+#define TRAIN_PIN 12
+#define LED_PIN 11
 
 boolean shouldStartTrain = false;
 
 int helligkeitLed = 50;
 
 void startTrain() {
-  digitalWrite(bahn, HIGH);
+  digitalWrite(TRAIN_PIN, HIGH);
   delay(5000);
-  digitalWrite(bahn, LOW);
+  digitalWrite(TRAIN_PIN, LOW);
 }
 
 void receiveEvent(int howMany) {
@@ -21,27 +20,26 @@ void receiveEvent(int howMany) {
 }
 
 void setup() {
-  pinMode(bahn, OUTPUT);
-  pinMode(led, OUTPUT);
+  pinMode(TRAIN_PIN, OUTPUT);
+  pinMode(LED_PIN, OUTPUT);
 
   Wire.begin(ADDRESS);
   Wire.onReceive(receiveEvent);
 
   randomSeed(analogRead(A0));
 
-  analogWrite(led, helligkeitLed);
+  analogWrite(LED_PIN, helligkeitLed);
 }
 
 void loop() {
-  int zufall = random(1, 10000);
-
-  if (zufall == 1) {
-    analogWrite(led, 0);
+  if (random(1, 10000) == 1) {
+    analogWrite(LED_PIN, 0);
     delay(5);
-    analogWrite(led, helligkeitLed);
+    analogWrite(LED_PIN, helligkeitLed);
   }
 
   if (shouldStartTrain) {
     startTrain();
+    shouldStartTrain = false;
   }
 }
