@@ -3,17 +3,15 @@
 #include "Modellbahn.h"
 
 
+#define ADDRESS 1
+
 //Pin für die LED
 #define LEDPIN 11
-
 //Anzahl der Angeschlossenen LEDs
 #define NUMPIXELS 4
 
-#define ADDRESS 1
-
-
-int fire = 8;
-int light = 9;
+#define FIRE_PIN 8
+#define LIGHT_PIN 9
 
 boolean shouldStartShow = false;
 
@@ -21,17 +19,16 @@ NeoPixel led(NUMPIXELS, LEDPIN);
 
 
 void startShow() {
-  unsigned long timeEnd = millis() + 30000;
+  int duration = 10;
 
-  digitalWrite(fire, HIGH);
-  analogWrite(light, 50);
+  digitalWrite(FIRE_PIN, HIGH);
+  analogWrite(LIGHT_PIN, 50);
 
-  while (millis() < timeEnd) {
-    LightEffects::torch(&led);
-  }
+  LightEffects::torch(&led, duration);
+
   led.off();
-  digitalWrite(fire, LOW);
-  digitalWrite(light, LOW);
+  digitalWrite(FIRE_PIN, LOW);
+  digitalWrite(LIGHT_PIN, LOW);
 }
 
 void receiveEvent(int howMany) {
@@ -39,13 +36,12 @@ void receiveEvent(int howMany) {
 }
 
 void setup() {
+  Serial.begin(9600);
+  pinMode(LIGHT_PIN, OUTPUT);
+  pinMode(FIRE_PIN, OUTPUT);
+
   Wire.begin(ADDRESS);
   Wire.onReceive(receiveEvent);
-
-  pinMode(light, OUTPUT);
-  pinMode(fire, OUTPUT);
-
-  receiveEvent(0);
 }
 
 void loop() {

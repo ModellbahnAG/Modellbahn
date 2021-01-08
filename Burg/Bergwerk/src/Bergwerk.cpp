@@ -36,6 +36,7 @@ void explosion() {
   myServo.write(90);
 
   LightEffects::flash(&flashLED);
+  flashLED.off();
 
   delay(2000);
   myServo.write(0);
