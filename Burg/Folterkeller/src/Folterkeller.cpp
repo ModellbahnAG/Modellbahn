@@ -24,7 +24,7 @@ void startShow() {
   digitalWrite(FIRE_PIN, HIGH);
   analogWrite(LIGHT_PIN, 50);
 
-  LightEffects::torch(&led, duration);
+  led.torch(duration);
 
   led.off();
   digitalWrite(FIRE_PIN, LOW);
