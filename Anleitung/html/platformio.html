@@ -1,0 +1,151 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=9"/>
+<meta name="generator" content="Doxygen 1.8.17"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Anleitung: PlatformIO</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="resize.js"></script>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+  $(document).ready(function() { init_search(); });
+/* @license-end */
+</script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr style="height: 56px;">
+  <td id="projectalign" style="padding-left: 0.5em;">
+   <div id="projectname">Anleitung
+   </div>
+  </td>
+   <td>        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <img id="MSearchSelect" src="search/mag_sel.png"
+               onmouseover="return searchBox.OnSearchSelectShow()"
+               onmouseout="return searchBox.OnSearchSelectHide()"
+               alt=""/>
+          <input type="text" id="MSearchField" value="Suchen" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><img id="MSearchCloseImg" border="0" src="search/close.png" alt=""/></a>
+          </span>
+        </div>
+</td>
+ </tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Erzeugt von Doxygen 1.8.17 -->
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+var searchBox = new SearchBox("searchBox", "search",false,'Suchen');
+/* @license-end */
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+/* @license magnet:?xt=urn:btih:cf05388f2679ee054f2beb29a391d25f4e673ac3&amp;dn=gpl-2.0.txt GPL-v2 */
+$(document).ready(function(){initNavTree('platformio.html',''); initResizable(); });
+/* @license-end */
+</script>
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<iframe src="javascript:void(0)" frameborder="0" 
+        name="MSearchResults" id="MSearchResults">
+</iframe>
+</div>
+
+<div class="PageDoc"><div class="header">
+  <div class="headertitle">
+<div class="title">PlatformIO </div>  </div>
+</div><!--header-->
+<div class="contents">
+<div class="textblock"><h1><a class="anchor" id="Einleitung"></a>
+Einleitung</h1>
+<p>PlatformIO ist kein eigenstädniger Editor, sondern ein Plugin, welches für verschiedene Editoren verfügbar ist. Wir nutzen PlatformIO in Atom. Das ist aber für die Bedienung von <code>PlatformIO</code> nicht wichtig.</p>
+<h1><a class="anchor" id="newproject"></a>
+Ein neues Projekt erstellen</h1>
+<p>Anders als bei der Arduino IDE können wir nicht einfach PlatformIO öffnen und direkt drauf los programmieren, sondern müssen zuerst ein neues Projekt erstellen. <br  />
+Dafür müssen wir im <code> Home Tab </code> von PlatformIO <code>"New Project"</code> wählen und das neue Projekt konfigurieren. Geöffnet wird der <code>Home Tab</code> mit dem Knopf <img src="Home.png" alt="" width="5%" class="inline"/> </p>
+<p>Jetzt muss das neue Projekt konfiguriert werden. Als Name sollte ein aussagekräftiger Name gewählt werden, damit das Pfojekt auch später wieder gefunden wird. Als Board wird der Typ des Arduinos angegeben, in den meisten Fällen ist das der <code>Arduino Uno</code>. Dies lässt sich später noch in der <a class="el" href="platformio.html#platformioini">Konfiguration mit platformio.ini</a> <code>platformio.ini</code> Datei anpassen. Als Framework MUSS Arduino ausgewählt sein. Um Github nutzen zu können, muss das Projekt im Ordner <code>Modellbahn</code> oder in einem seiner Unterordner gespeichert sein. <br  />
+Sobald das Projekt erstellt wurde, kann in der sich im <code>src</code> Ordner befindenden <code>main.cpp</code> Datei das Programm geschrieben werden.</p>
+<div class="image">
+<img src="New_Project_Description.png" alt="" width="100%"/>
+</div>
+ <h1><a class="anchor" id="libraries"></a>
+Bibliotheken / Libraries hinzufügen</h1>
+<p>Die verwendeten Libraries müssen in der <a class="el" href="platformio.html#platformioini">Konfiguration mit platformio.ini</a> platformio.ini Datei eingetragen werden, damit sie verwendet werden können. Glücklicherweise müssen wir das aber nicht selber tun, sondern können dafür die <code>Libraries</code> Funktion von PlatformIO nutzen. Diese verbirgt sich im <code>Home</code> Tab hinter dem Knopf <img src="Libraries.png" alt="" width="5%" class="inline"/>  <br  />
+Dort können alle verfügbaren Libraries durch sucht werden und dann mit <code>Add to Project</code> zu einem bestimmten Projekt hinzugefügt werden. Alle nötigen Einträge in die <a class="el" href="platformio.html#platformioini">Konfiguration mit platformio.ini</a> platformio.ini Datei werden automatisch gemacht. <br  />
+Es gibt jedoch eine Library, die dort nicht zu finden sein wird, die <code>Modellbahn</code> Library. Der Grund dafür ist, dass es unsere eigene ist, die wir nicht veröffentlicht haben. Um diese nutzen zu können, müssen wir dann doch in die <a class="el" href="platformio.html#platformioini">Konfiguration mit platformio.ini</a> platformio.ini Datei und Folgende Zeile einfügen: </p><div class="fragment"><div class="line">lib_deps = https:<span class="comment">//github.com/ModellbahnAG/Libraries-Modellbahn.git </span></div>
+</div><!-- fragment --><h1><a class="anchor" id="programming"></a>
+Programmieren</h1>
+<p>Wer die schon mit Arduino programmiert hat, sollte auch mit PlatformIO zurecht kommen, da alles genau so programmiert wird wie mit der Arduino IDE.</p>
+<div class="image">
+<img src="Editor_Description.png" alt="" width="100%"/>
+</div>
+ <h2><a class="anchor" id="upload"></a>
+Hochladen</h2>
+<p><img src="Upload.png" alt="" width="5%" class="inline"/> </p>
+<p>Dieser Knopf lädt das Programm auf den Arduino hoch.</p>
+<h2><a class="anchor" id="build"></a>
+Build</h2>
+<p><img src="Compile.png" alt="" width="5%" class="inline"/> </p>
+<p>Dieser Knopf kompiliert den Code. Wenn euch das nichts sagt, ist das nicht schlimm, wichtig ist nur, dass genau das gleiche passiert wenn ihr hochladen drückt, nur ohne das das Programm auf den Arduino hochgeladen wird. Das Programm wird lediglich in eine für den Arduino verständliche Sprache übersetzt. Dabei werden auch schon die Fehler gefunden, die ein Hochladen verhindern würden.</p>
+<h2><a class="anchor" id="serialmonitor"></a>
+Serieller Monitor</h2>
+<p><img src="Serial_Monitor.png" alt="" width="5%" class="inline"/> </p>
+<p>Dieser Knopf öffnet den seriellen Monitor, über den die Ausgaben des Arduinos angezeigt werden.</p>
+<h1><a class="anchor" id="platformioini"></a>
+Konfiguration mit platformio.ini</h1>
+<p>In der <code>platformio.ini</code> Datei können im Nachhinein noch einige Konfigurationen angepasst werden und weitere hinzugefügt werden. Die wichtigsten Dabei sind das Board und die verwendeten Libraries. Um die <code>Modellbahn</code> Library verwenden zu können, die Library, in der schon einige häufig gebrauchten Funktionen für den Modellbau programmiert sind, muss der Github Link zu dem Repository angegeben werden. Das machen wir mit folgender Zeile: </p><div class="fragment"><div class="line">lib_deps = https:<span class="comment">//github.com/ModellbahnAG/Libraries-Modellbahn.git </span></div>
+</div><!-- fragment --><div class="image">
+<img src="Platform.ini_Description.png" alt="" width="100%"/>
+</div>
+  </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="footer">Erzeugt von
+    <a href="http://www.doxygen.org/index.html">
+    <img class="footer" src="doxygen.png" alt="doxygen"/></a> 1.8.17 </li>
+  </ul>
+</div>
+</body>
+</html>
