@@ -1,13 +1,13 @@
 \hypertarget{index_Einleitung}{}\doxysection{Einleitung}\label{index_Einleitung}
 Platform\+IO ist kein eigenstädniger Editor, sondern ein Plugin, welches für verschiedene Editoren verfügbar ist. Wir nutzen Platform\+IO in Atom. Das ist aber für die Bedienung von {\ttfamily Platform\+IO} nicht wichtig.\hypertarget{platformio_newproject}{}\doxysection{Ein neues Projekt erstellen}\label{platformio_newproject}
-Anders als bei der Arduino I\+DE können wir nicht einfach Platform\+IO öffnen und direkt drauf los programmieren, sondern müssen zuerst ein neues Projekt erstellen. ~\newline
+Anders als bei der Arduino IDE können wir nicht einfach Platform\+IO öffnen und direkt drauf los programmieren, sondern müssen zuerst ein neues Projekt erstellen. ~\newline
 Dafür müssen wir im {\ttfamily  Home Tab } von Platform\+IO {\ttfamily \char`\"{}\+New Project\char`\"{}} wählen und das neue Projekt konfigurieren. Geöffnet wird der {\ttfamily Home Tab} mit dem Knopf  
 \begin{DoxyInlineImage}
 \includegraphics[width=5%]{Home.png}
 \end{DoxyInlineImage}
 
 
-Jetzt muss das neue Projekt konfiguriert werden. Als Name sollte ein aussagekräftiger Name gewählt werden, damit das Pfojekt auch später wieder gefunden wird. Als Board wird der Typ des Arduinos angegeben, in den meisten Fällen ist das der {\ttfamily Arduino Uno}. Dies lässt sich später noch in der \mbox{\hyperlink{platformio_platformioini}{Konfiguration mit platformio.\+ini}} {\ttfamily platformio.\+ini} Datei anpassen. Als Framework M\+U\+SS Arduino ausgewählt sein. Um Github nutzen zu können, muss das Projekt im Ordner {\ttfamily Modellbahn} oder in einem seiner Unterordner gespeichert sein. ~\newline
+Jetzt muss das neue Projekt konfiguriert werden. Als Name sollte ein aussagekräftiger Name gewählt werden, damit das Pfojekt auch später wieder gefunden wird. Als Board wird der Typ des Arduinos angegeben, in den meisten Fällen ist das der {\ttfamily Arduino Uno}. Dies lässt sich später noch in der \mbox{\hyperlink{platformio_platformioini}{Konfiguration mit platformio.\+ini}} {\ttfamily platformio.\+ini} Datei anpassen. Als Framework MUSS Arduino ausgewählt sein. Um Github nutzen zu können, muss das Projekt im Ordner {\ttfamily Modellbahn} oder in einem seiner Unterordner gespeichert sein. ~\newline
 Sobald das Projekt erstellt wurde, kann in der sich im {\ttfamily src} Ordner befindenden {\ttfamily main.\+cpp} Datei das Programm geschrieben werden.
 
  
@@ -24,9 +24,10 @@ Dort können alle verfügbaren Libraries durch sucht werden und dann mit {\ttfam
 Es gibt jedoch eine Library, die dort nicht zu finden sein wird, die {\ttfamily Modellbahn} Library. Der Grund dafür ist, dass es unsere eigene ist, die wir nicht veröffentlicht haben. Um diese nutzen zu können, müssen wir dann doch in die \mbox{\hyperlink{platformio_platformioini}{Konfiguration mit platformio.\+ini}} platformio.\+ini Datei und Folgende Zeile einfügen\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{lib\_deps = https:\textcolor{comment}{//github.com/ModellbahnAG/Libraries-\/Modellbahn.git }}
+
 \end{DoxyCode}
 \hypertarget{platformio_programming}{}\doxysection{Programmieren}\label{platformio_programming}
-Wer die schon mit Arduino programmiert hat, sollte auch mit Platform\+IO zurecht kommen, da alles genau so programmiert wird wie mit der Arduino I\+DE.
+Wer die schon mit Arduino programmiert hat, sollte auch mit Platform\+IO zurecht kommen, da alles genau so programmiert wird wie mit der Arduino IDE.
 
  
 \begin{DoxyImageNoCaption}
@@ -57,6 +58,7 @@ Dieser Knopf öffnet den seriellen Monitor, über den die Ausgaben des Arduinos 
 In der {\ttfamily platformio.\+ini} Datei können im Nachhinein noch einige Konfigurationen angepasst werden und weitere hinzugefügt werden. Die wichtigsten Dabei sind das Board und die verwendeten Libraries. Um die {\ttfamily Modellbahn} Library verwenden zu können, die Library, in der schon einige häufig gebrauchten Funktionen für den Modellbau programmiert sind, muss der Github Link zu dem Repository angegeben werden. Das machen wir mit folgender Zeile\+: 
 \begin{DoxyCode}{0}
 \DoxyCodeLine{lib\_deps = https:\textcolor{comment}{//github.com/ModellbahnAG/Libraries-\/Modellbahn.git }}
+
 \end{DoxyCode}
 
 

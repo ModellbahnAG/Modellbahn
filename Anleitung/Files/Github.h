@@ -64,7 +64,7 @@
 *
 * @subsection branches Branches
 * In den Branches kann man, wie bereits erwähnt, an verschiedenen Versionen des
-* Projekts gleichzeitig zu arbeiten. Es empfielt sich einen Branch zu haben, in
+* Projekts gleichzeitig arbeiten. Es empfielt sich einen Branch zu haben, in
 * dem nicht gearbeitet wird, sondern in dem jeder Zeit eine funktionsfähige
 * Version zu haben. In den anderen Branches kann dann paralllel an verschieden
 * Funktionen arbeiten und sie in den "master" oder "main" Branch @ref merge
