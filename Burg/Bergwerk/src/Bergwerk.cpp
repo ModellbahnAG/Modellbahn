@@ -9,16 +9,20 @@
 
 #define HEATING_TIME 9000
 
-#define PIN         9
-#define NUMPIXELS   2
+#define FLASH_PIN 9
+#define NUMPIXELS 2
+
+#define SERVO_PIN 8
+#define SMOKER_PIN 13
+#define ALARM_LED_PIN 10
+
+#define EXPLOSION_LIGHTING_BRIGHTNESS 10
+#define GLIMMING_TIME 2000
+
 #define ADDRESS 0
 
-NeoPixel flashLED = NeoPixel(NUMPIXELS, PIN);
+NeoPixel flashLED = NeoPixel(NUMPIXELS, FLASH_PIN);
 
-
-byte servoPin = 8;
-byte smoker = 13;
-byte alarmLED = 10;
 
 Servo myServo;
 
@@ -27,28 +31,28 @@ bool shouldExplode = false;
 
 void explosion() {
   flashLED.fill(CRGB::White);
-  flashLED.setBrightness(10);
+  flashLED.setBrightness(EXPLOSION_LIGHTING_BRIGHTNESS);
 
-  digitalWrite(smoker, HIGH);
+  digitalWrite(SMOKER_PIN, HIGH);
   unsigned long startTime = millis();
 
   while (millis() < startTime + HEATING_TIME) {
-    digitalWrite(alarmLED, !digitalRead(alarmLED));   //alle 0.5 Sekunden den Wert der LED wechseln
+    digitalWrite(ALARM_LED_PIN, !digitalRead(ALARM_LED_PIN));   //alle 0.5 Sekunden den Wert der LED wechseln
     delay(500);
   }
 
-  digitalWrite(alarmLED, LOW);
+  digitalWrite(ALARM_LED_PIN, LOW);
 
   myServo.write(SERVO_OPEN);
 
   flashLED.flash();
-  digitalWrite(smoker, LOW);
+  digitalWrite(SMOKER_PIN, LOW);
 
   flashLED.fill(CRGB::White);
-  flashLED.setBrightness(10);
+  flashLED.setBrightness(EXPLOSION_LIGHTING_BRIGHTNESS);
 
+  delay(GLIMMING_TIME);
 
-  delay(2000);
   myServo.write(SERVO_CLOSED);
   flashLED.off();
 }
@@ -62,10 +66,10 @@ void receiveEvent(int howMany) {
 void setup() {
   Serial.begin(9600);
 
-  pinMode(smoker, OUTPUT);
-  pinMode(alarmLED, OUTPUT);
+  pinMode(SMOKER_PIN, OUTPUT);
+  pinMode(ALARM_LED_PIN, OUTPUT);
 
-  myServo.attach(servoPin);
+  myServo.attach(SERVO_PIN);
   myServo.write(SERVO_CLOSED);
 
   Wire.begin(ADDRESS);
