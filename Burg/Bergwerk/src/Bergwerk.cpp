@@ -4,6 +4,10 @@
 
 #include "Modellbahn.h"
 
+#define SERVO_OPEN 90
+#define SERVO_CLOSED 0
+
+#define HEATING_TIME 9000
 
 #define PIN         9
 #define NUMPIXELS   2
@@ -22,23 +26,31 @@ bool shouldExplode = false;
 
 
 void explosion() {
+  flashLED.fill(CRGB::White);
+  flashLED.setBrightness(10);
+
   digitalWrite(smoker, HIGH);
   unsigned long startTime = millis();
 
-  while (millis() < startTime + 10000) {
+  while (millis() < startTime + HEATING_TIME) {
     digitalWrite(alarmLED, !digitalRead(alarmLED));   //alle 0.5 Sekunden den Wert der LED wechseln
     delay(500);
   }
 
   digitalWrite(alarmLED, LOW);
-  digitalWrite(smoker, LOW);
 
-  myServo.write(90);
+  myServo.write(SERVO_OPEN);
 
   flashLED.flash();
+  digitalWrite(smoker, LOW);
+
+  flashLED.fill(CRGB::White);
+  flashLED.setBrightness(10);
+
 
   delay(2000);
-  myServo.write(0);
+  myServo.write(SERVO_CLOSED);
+  flashLED.off();
 }
 
 
@@ -54,7 +66,7 @@ void setup() {
   pinMode(alarmLED, OUTPUT);
 
   myServo.attach(servoPin);
-  myServo.write(0);
+  myServo.write(SERVO_CLOSED);
 
   Wire.begin(ADDRESS);
   Wire.onReceive(receiveEvent);
