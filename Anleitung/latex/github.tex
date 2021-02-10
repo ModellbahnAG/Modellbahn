@@ -1,0 +1,37 @@
+\hypertarget{github_general}{}\doxysection{Grundsätzliches über Git}\label{github_general}
+Git ist ein Werkzeug zur Versionsverwaltung. Github ist kurz gesagt eine Plattform, die Git online anbietet. Normalerweise wird Git über das Terminal genutzt. Das ist allerdings nicht für Leute, die noch nie mit dem Terminal gearbeitet haben ungewohnt und abschreckend. Deshalb nutzen wir \href{http://desktop.github.com}{\texttt{ Github Desktop}}, ein Programm, das es uns ermöglich alle Funktionen von Git in einer übersichtlichen Benutzeroberfläche zu nutzen.\hypertarget{github_functionality}{}\doxysubsection{Wie funktioniert Git?}\label{github_functionality}
+Das Konzept hinter git ist ganz einfach. Wir speichern unsere Datei mit Informationen zu den Änderungen, die seit dem letzten \mbox{\hyperlink{github_commit}{Commit}} gemacht wurden. So kann man zu jeder Zeit problemlos auf alle älteren Version der Datei zurückgreifen können. Zusätzlich können gleichzeitig verschiedene \char`\"{}\+Zweige\char`\"{} an unterschiedlichen Versionen angelegt werden. So kann zum Beispiel ein Zweig für eine funktionierende Version und eine Version, in der an neuen Funktionen gearbeitet wird, ohne die funktionierende Version zu verlieren. Diese Zweige werden \mbox{\hyperlink{github_branches}{Branches}} genannt.\hypertarget{github_commit}{}\doxysubsection{Commit}\label{github_commit}
+Als \char`\"{}\+Commit\char`\"{} kann man sich einfach eine Speicherung der Datei (oder aller Dateien im Project) vorstellen. Statt nur zu Speichern, wird aber hier noch eine Beschreibung der Änderungen angegeben, um so später genau nachvollziehen zu können, wann was geändert wurde.\hypertarget{github_sync}{}\doxysubsection{Synchronisieren}\label{github_sync}
+Da wir die Datei aber nicht nur bei uns lokal gespeichert haben wollen, sondern von überall Zugriff auf sie haben möchten, speichern wir das Repository (der Ort wo alle unsere Dateien unserers Projekts gespeichert sind) woanders. Hierfür verwenden wir Github.\hypertarget{github_handling}{}\doxysection{Bedienung}\label{github_handling}
+\hypertarget{github_diffs}{}\doxysubsection{Änderungen Anzeigen und committen}\label{github_diffs}
+In Github Desktop kann man sich die gemachten Änderungen seit dem letzten \mbox{\hyperlink{github_commit}{Commit}} Commit anzeigen lassen, die Änderungen rückgängig gemacht werden und die Änderungen commiten. Mit einem Rechtsklick auf eine der geänderten Datein kann man die Änderungen mit \char`\"{}\+Discard changes\char`\"{} rückgängig gemacht werden. 
+
+Um die Änderungen in Git zu speichern müssen sie commited werden. Dafür muss zuerst eine aussagekräftige kurze Beschreibung für die gemachten Änderungen als Commit-\/\+Beschreibung angegeben werden. Anschließend kann auf Commit gedrückt werden, um in den ausgewählten Branch einen \mbox{\hyperlink{github_commit}{Commit}} Commit zu machen.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth]{Commit.png}}
+\end{DoxyImageNoCaption}
+\hypertarget{github_pull}{}\doxysubsection{Push und Pull}\label{github_pull}
+Nach einem \mbox{\hyperlink{github_commit}{Commit}} Commit haben wir also die Änderungen in Git gespeichert, allerdings nur lokal bei uns. Um diese auch auf Github zu übertragen müssen wir sie pushen. Umgekehrt können wir aber auch Änderungen, die wir noch nicht bei uns lokal haben von Github pullen. Sobald man anfängt an einem Projekt weiter zu arbeiten sollte man vorher immer pullen um sicherzustellen, dass immer mit der neuesten Version gearbeitet wird.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth]{Push-Pull.png}}
+\end{DoxyImageNoCaption}
+\hypertarget{github_branches}{}\doxysubsection{Branches}\label{github_branches}
+In den Branches kann man, wie bereits erwähnt, an verschiedenen Versionen des Projekts gleichzeitig arbeiten. Es empfielt sich einen Branch zu haben, in dem nicht gearbeitet wird, sondern in dem jeder Zeit eine funktionsfähige Version zu haben. In den anderen Branches kann dann paralllel an verschieden Funktionen arbeiten und sie in den \char`\"{}master\char`\"{} oder \char`\"{}main\char`\"{} Branch \mbox{\hyperlink{github_merge}{Merge}} mergen sobald sie funktionieren.
+
+ 
+\begin{DoxyImageNoCaption}
+  \mbox{\includegraphics[width=\textwidth]{Branches-Description.png}}
+\end{DoxyImageNoCaption}
+
+
+\begin{DoxyNote}{Zu beachten}
+Die Branches mit dem Namen {\ttfamily upstream/}... kommen daher, dass dieses Repository zuerst auf einem anderen Account erstellt wurde und dann einfach geforkt (eine Fork ist eine Abspaltung vom ursrünglichen Porjekt) wurde. Von diesen Branches kann nur \mbox{\hyperlink{github_merge}{Merge}} gemerged werden. Bearbeitet werden können sie nur vom Besitzer des ursprünglichen Repositorys.
+\end{DoxyNote}
+\hypertarget{github_merge}{}\doxysubsection{Merge}\label{github_merge}
+Zwei \mbox{\hyperlink{github_branches}{Branches}} Branches zu mergen macht eigentlich genau das, was man sich vorstellt, wenn man die Bedeutung des Begriffs im Englischen betrachtet. Zwei Branches werden vereint. Dabei werden die Änderungen des Branches, der in den Branch, in dem man sich zur Zeit befindet übernommen. \begin{DoxyNote}{Zu beachten}
+Existieren aber in beiden Branches Änderungen zu dem gleichen Code, ist das mergen nicht möchlich. 
+\end{DoxyNote}

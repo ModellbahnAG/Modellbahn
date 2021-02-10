@@ -2,7 +2,6 @@
 #include <Wire.h>
 #include "Modellbahn.h"
 
-
 #define ADDRESS 1
 
 //Pin für die LED
@@ -12,6 +11,9 @@
 
 #define FIRE_PIN 8
 #define LIGHT_PIN 9
+
+// Zeit, die die Show dauern soll
+#define SHOW_DURATION 10
 
 boolean shouldStartShow = false;
 
@@ -31,6 +33,11 @@ void startShow() {
   digitalWrite(LIGHT_PIN, LOW);
 }
 
+/* Setze shouldStartShow auf true wenn eine Signal vom Taster Arduino ankommt
+*
+* Die eigentlich Explosion kann nicht in dieser Funktion ausgeführt werden, da
+* es bei Interrupt Funktionen Probleme mit delay gibt.
+*/
 void receiveEvent(int howMany) {
   shouldStartShow = Wire.read();
 }
